@@ -1,0 +1,141 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Learning Roadmap - SkillGap</title>
+
+    <link rel="stylesheet" href="{% static 'css/learning_roadmap.css' %}">
+</head>
+
+<body>
+
+<div class="app">
+
+    <!-- SIDEBAR -->
+
+    <aside class="sidebar">
+
+        <div class="logo">
+            SkillGap
+        </div>
+
+        <nav class="menu">
+
+            <a href="/dashboard/">
+                🏠 <span>Dashboard</span>
+            </a>
+
+            <a href="/skill_assesment/">
+                📋 <span>Skill Assessment</span>
+            </a>
+
+            <a href="/dreamjob/">
+                🎯 <span>Dream Job</span>
+            </a>
+
+            <a href="/skillgap/">
+                📊 <span>Skill Gap Analysis</span>
+            </a>
+
+            <a href="/learning_roadmap/" class="active">
+                🗺️ <span>Learning Roadmap</span>
+            </a>
+
+            <a href="/quiz/">
+                🧠 <span>Skill Quiz</span>
+            </a>
+
+            <a href="/resume_analysis/">
+                📄 <span>Upload Resume</span>
+            </a>
+
+            <a href="/profile/">
+                👤 <span>Profile</span>
+            </a>
+
+            <a href="/settings/">
+                ⚙️ <span>Settings</span>
+            </a>
+
+        </nav>
+
+    </aside>
+
+
+    <!-- MAIN -->
+
+    <main class="main">
+
+        <div class="topbar">
+
+            <div>
+                <h1>Learning Roadmap</h1>
+                <p>Follow your personalized learning path.</p>
+            </div>
+
+            <a href="/dashboard/" class="back-btn">
+                ← Dashboard
+            </a>
+
+        </div>
+
+
+        <!-- CAREER HEADER -->
+
+        <div class="career-card">
+
+            <div class="career-icon" id="careerIcon">
+                💻
+            </div>
+
+            <div class="career-info">
+
+                <h2 id="careerTitle">
+                    Python Developer
+                </h2>
+
+                <p id="careerDescription">
+                    Complete these learning steps to become job-ready.
+                </p>
+
+            </div>
+
+            <div class="progress-area">
+
+                <span>Overall Progress</span>
+
+                <strong id="overallProgress">
+                    20%
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <!-- LEARNING PATH -->
+
+        <div class="roadmap-box">
+
+            <h2>Your Learning Path</h2>
+
+            <p class="roadmap-subtitle">
+                Complete each step and move to the next level.
+            </p>
+
+            <div id="roadmapContainer"></div>
+
+        </div>
+
+    </main>
+
+</div>
+
+<script src="{% static 'js/learning_roadmap.js' %}"></script>
+
+</body>
+</html>

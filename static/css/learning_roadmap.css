@@ -1,0 +1,392 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: #f5f6fb;
+    color: #222;
+}
+
+.app {
+    display: flex;
+    min-height: 100vh;
+}
+
+
+/* ================= SIDEBAR ================= */
+
+.sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 240px;
+    height: 100vh;
+    background: #5546d9;
+    color: white;
+    padding: 28px 14px;
+    overflow-y: auto;
+}
+
+.logo {
+    font-size: 28px;
+    font-weight: bold;
+    margin: 0 15px 30px;
+}
+
+.menu a {
+    display: block;
+    color: white;
+    text-decoration: none;
+    padding: 13px 15px;
+    margin: 5px 0;
+    border-radius: 10px;
+    font-size: 14px;
+}
+
+.menu a:hover,
+.menu a.active {
+    background: rgba(255,255,255,0.20);
+}
+
+
+/* ================= MAIN ================= */
+
+.main {
+    margin-left: 240px;
+    width: calc(100% - 240px);
+    padding: 35px;
+}
+
+
+/* ================= TOPBAR ================= */
+
+.topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.topbar h1 {
+    font-size: 30px;
+    margin-bottom: 6px;
+}
+
+.topbar p {
+    color: #777;
+}
+
+.back-btn {
+    text-decoration: none;
+    color: #5546d9;
+    font-weight: bold;
+}
+
+
+/* ================= CAREER CARD ================= */
+
+.career-card {
+    background: linear-gradient(120deg, #5546d9, #7869ee);
+    color: white;
+    padding: 25px;
+    border-radius: 18px;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    margin-bottom: 25px;
+}
+
+.career-icon {
+    width: 58px;
+    height: 58px;
+    border-radius: 15px;
+    background: rgba(255,255,255,0.18);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 27px;
+}
+
+.career-info {
+    flex: 1;
+}
+
+.career-info h2 {
+    font-size: 22px;
+    margin-bottom: 7px;
+}
+
+.career-info p {
+    font-size: 14px;
+    opacity: 0.9;
+}
+
+.progress-area {
+    text-align: right;
+}
+
+.progress-area span {
+    display: block;
+    font-size: 13px;
+    opacity: 0.9;
+    margin-bottom: 6px;
+}
+
+.progress-area strong {
+    font-size: 22px;
+}
+
+
+/* ================= ROADMAP BOX ================= */
+
+.roadmap-box {
+    background: white;
+    padding: 30px;
+    border-radius: 18px;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.06);
+}
+
+.roadmap-box h2 {
+    font-size: 22px;
+    margin-bottom: 6px;
+}
+
+.roadmap-subtitle {
+    color: #777;
+    margin-bottom: 30px;
+}
+
+
+/* ================= ROADMAP ITEM ================= */
+
+.roadmap-item {
+    display: flex;
+    position: relative;
+    padding-bottom: 35px;
+}
+
+.roadmap-item:last-child {
+    padding-bottom: 0;
+}
+
+
+/* line */
+
+.roadmap-item:not(:last-child)::after {
+    content: "";
+    position: absolute;
+
+    left: 24px;
+    top: 50px;
+    bottom: 0;
+
+    width: 2px;
+    background: #ddd;
+}
+
+
+/* circle */
+
+.step-circle {
+    width: 50px;
+    height: 50px;
+    min-width: 50px;
+
+    border-radius: 50%;
+
+    background: #e9e7fb;
+    color: #5546d9;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-weight: bold;
+    font-size: 16px;
+
+    position: relative;
+    z-index: 2;
+}
+
+
+/* completed */
+
+.roadmap-item.completed .step-circle {
+    background: #5546d9;
+    color: white;
+}
+
+
+/* in progress */
+
+.roadmap-item.progress .step-circle {
+    background: #7869ee;
+    color: white;
+}
+
+
+/* content */
+
+.step-content {
+    flex: 1;
+    padding-left: 20px;
+}
+
+.step-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.step-label {
+    font-size: 12px;
+    color: #888;
+    letter-spacing: 1px;
+    margin-bottom: 5px;
+}
+
+.step-content h3 {
+    font-size: 19px;
+    margin-bottom: 8px;
+}
+
+.step-content p {
+    color: #666;
+    font-size: 14px;
+    line-height: 1.5;
+    margin-bottom: 12px;
+}
+
+
+/* tags */
+
+.tags {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.tag {
+    background: #f0effb;
+    color: #5546d9;
+    padding: 6px 10px;
+    border-radius: 7px;
+    font-size: 12px;
+}
+
+
+/* status */
+
+.status {
+    padding: 7px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+.status.completed {
+    background: #e7f5eb;
+    color: #3c8b55;
+}
+
+.status.progress {
+    background: #eeeaff;
+    color: #5546d9;
+}
+
+.status.upcoming {
+    background: #f1f1f1;
+    color: #777;
+}
+
+
+/* button */
+
+.step-btn {
+    margin-top: 13px;
+
+    background: #5546d9;
+    color: white;
+
+    border: none;
+    padding: 9px 16px;
+
+    border-radius: 8px;
+
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.step-btn:hover {
+    background: #4535bd;
+}
+
+
+/* ================= MOBILE ================= */
+
+@media(max-width: 900px) {
+
+    .sidebar {
+        width: 200px;
+    }
+
+    .main {
+        margin-left: 200px;
+        width: calc(100% - 200px);
+        padding: 25px;
+    }
+
+}
+
+@media(max-width: 650px) {
+
+    .sidebar {
+        width: 70px;
+        padding: 25px 8px;
+    }
+
+    .logo {
+        font-size: 15px;
+        margin-left: 5px;
+    }
+
+    .menu a {
+        text-align: center;
+        padding: 13px 5px;
+    }
+
+    .menu a span {
+        display: none;
+    }
+
+    .main {
+        margin-left: 70px;
+        width: calc(100% - 70px);
+        padding: 18px;
+    }
+
+    .career-card {
+        flex-wrap: wrap;
+    }
+
+    .progress-area {
+        text-align: left;
+        width: 100%;
+        margin-top: 10px;
+    }
+
+    .roadmap-box {
+        padding: 20px;
+    }
+
+    .step-top {
+        align-items: flex-start;
+        gap: 10px;
+    }
+}

@@ -1,0 +1,193 @@
+ {% load static%}
+ 
+ <script src="{% static 'js/onboarding.js' %}"></script>
+ <link rel="stylesheet" href="{% static 'css/onboarding.css' %}">
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Get Started - SkillGap</title>
+
+    
+</head>
+
+<body>
+
+    <div class="onboarding-page">
+
+        <!-- TOP -->
+        <header class="topbar">
+
+            <div class="logo">
+                Skill<span>Gap</span>
+            </div>
+
+            <div class="step-text">
+                Step 1 of 2
+            </div>
+
+        </header>
+
+
+        <!-- MAIN -->
+        <main class="onboarding-container">
+
+            <div class="heading">
+
+                <div class="tag">
+                    GET STARTED
+                </div>
+
+                <h1>
+                    Let's Build Your
+                    <span>Career Profile.</span>
+                </h1>
+
+                <p>
+                    Tell us a little about yourself so we can
+                    understand your career goals and skills.
+                </p>
+
+            </div>
+
+
+            <!-- FORM CARD -->
+            <div class="onboarding-card">
+
+                <form id="onboardingForm">
+
+                    <!-- NAME -->
+                    <div class="form-group">
+
+                        <label for="fullName">
+                            Full Name
+                        </label>
+
+                        <input
+                            type="text"
+                            id="fullName"
+                            placeholder="Enter your full name"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- DREAM JOB -->
+                    <div class="form-group">
+
+                        <label for="dreamJob">
+                            What is your Dream Job?
+                        </label>
+
+                        <select id="dreamJob" required>
+
+                            <option value="">
+                                Select your dream job
+                            </option>
+
+                            <option value="Python Developer">
+                                Python Developer
+                            </option>
+
+                            <option value="Data Analyst">
+                                Data Analyst
+                            </option>
+
+                            <option value="Web Developer">
+                                Web Developer
+                            </option>
+
+                            <option value="Software Developer">
+                                Software Developer
+                            </option>
+
+                            <option value="Data Scientist">
+                                Data Scientist
+                            </option>
+
+                            <option value="Other">
+                                Other
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- SKILLS -->
+                    <div class="form-group">
+
+                        <label for="skills">
+                            Your Current Skills
+                        </label>
+
+                        <textarea
+                            id="skills"
+                            placeholder="Example: Python, HTML, CSS, MySQL"
+                            required
+                        ></textarea>
+
+                        <small>
+                            Enter the skills you currently know.
+                        </small>
+
+                    </div>
+
+
+                    <!-- EXPERIENCE -->
+                    <div class="form-group">
+
+                        <label for="level">
+                            Current Skill Level
+                        </label>
+
+                        <select id="level" required>
+
+                            <option value="">
+                                Select your level
+                            </option>
+
+                            <option value="Beginner">
+                                Beginner
+                            </option>
+
+                            <option value="Intermediate">
+                                Intermediate
+                            </option>
+
+                            <option value="Advanced">
+                                Advanced
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <button type="submit" class="continue-btn">
+                        Continue
+                        <span>→</span>
+                    </button>
+
+                </form>
+
+            </div>
+
+
+            <p class="bottom-text">
+                You can update your information later from your profile.
+            </p>
+
+        </main>
+
+    </div>
+
+
+    
+</body>
+
+</html>

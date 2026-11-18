@@ -1,0 +1,747 @@
+{% load static%}
+ 
+ 
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Dream Job - SkillGap</title>
+   <link rel="stylesheet" href="{% static 'css/dreamjob.css' %}">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #d3d4d5;
+            color: #050315;
+        }
+
+        /* TOP BAR */
+
+        .topbar {
+            height: 72px;
+            background: white;
+            border-bottom: 1px solid #e5e3eb;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 70px;
+        }
+
+        .logo {
+            font-size: 25px;
+            font-weight: bold;
+            color: #5b35d5;
+        }
+
+        .step {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .step span {
+            background: #f0ebff;
+            color: #5b35d5;
+            padding: 7px 13px;
+            border-radius: 20px;
+            margin-left: 10px;
+            font-weight: 600;
+        }
+
+        /* MAIN */
+
+        .container {
+            width: 1000px;
+            max-width: calc(100% - 40px);
+            margin: 55px auto 70px;
+        }
+
+        .heading {
+            text-align: center;
+            max-width: 700px;
+            margin: auto;
+        }
+
+        .small-title {
+            color: #6b46e5;
+            font-size: 12px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+        }
+
+        .heading h1 {
+            font-size: 42px;
+            margin-bottom: 15px;
+        }
+
+        .heading p {
+            color: #707070;
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        /* SEARCH */
+
+        .search {
+            width: 650px;
+            max-width: 100%;
+            height: 52px;
+
+            margin: 35px auto;
+
+            background: white;
+            border: 1px solid #ddd9e7;
+            border-radius: 10px;
+
+            display: flex;
+            align-items: center;
+
+            padding: 0 18px;
+        }
+
+        .search span {
+            font-size: 21px;
+            color: #777;
+            margin-right: 10px;
+        }
+
+        .search input {
+            border: none;
+            outline: none;
+            width: 100%;
+            font-size: 15px;
+        }
+
+        /* CARD */
+
+        .career-box {
+            background: white;
+            border: 1px solid #e5e2eb;
+            border-radius: 16px;
+
+            padding: 35px;
+
+            box-shadow: 0 10px 35px rgba(40, 30, 80, 0.06);
+        }
+
+        .career-heading {
+            margin-bottom: 25px;
+        }
+
+        .career-heading h2 {
+            font-size: 24px;
+            margin-bottom: 7px;
+        }
+
+        .career-heading p {
+            color: #777;
+            font-size: 14px;
+        }
+
+        /* GRID */
+
+        .jobs {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        /* JOB */
+
+        .job {
+            position: relative;
+
+            border: 1px solid #e3e0e9;
+            border-radius: 12px;
+
+            padding: 22px;
+
+            min-height: 165px;
+
+            display: flex;
+            gap: 16px;
+
+            cursor: pointer;
+
+            transition: 0.2s;
+        }
+
+        .job:hover {
+            border-color: #8c72e5;
+            transform: translateY(-2px);
+        }
+
+        .job.selected {
+            border: 2px solid #5b35d5;
+            background: #faf9ff;
+        }
+
+        /* ICON */
+
+        .icon {
+            width: 52px;
+            height: 52px;
+            min-width: 52px;
+
+            border-radius: 12px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .purple {
+            background: #eee9ff;
+            color: #5b35d5;
+        }
+
+        .blue {
+            background: #e8f1ff;
+            color: #3475d1;
+        }
+
+        .orange {
+            background: #fff0df;
+            color: #d87819;
+        }
+
+        .green {
+            background: #e5f7ed;
+            color: #2b9960;
+        }
+
+        .pink {
+            background: #fbe8f1;
+            color: #c34c7a;
+        }
+
+        .teal {
+            background: #e3f7f6;
+            color: #208e89;
+        }
+
+        /* TEXT */
+
+        .job h3 {
+            font-size: 17px;
+            margin-bottom: 8px;
+        }
+
+        .job p {
+            color: #777;
+            font-size: 13px;
+            line-height: 1.5;
+            margin-bottom: 12px;
+        }
+
+        .tags span {
+            display: inline-block;
+
+            background: #f5f4f8;
+            color: #666;
+
+            font-size: 11px;
+
+            padding: 5px 8px;
+
+            border-radius: 5px;
+
+            margin-right: 4px;
+        }
+
+        /* CHECK */
+
+        .check {
+            position: absolute;
+
+            right: 17px;
+            top: 17px;
+
+            width: 22px;
+            height: 22px;
+
+            border: 1px solid #d2ceda;
+            border-radius: 50%;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            color: transparent;
+            font-size: 12px;
+        }
+
+        .job.selected .check {
+            background: #5b35d5;
+            border-color: #5b35d5;
+            color: white;
+        }
+
+        /* BOTTOM */
+
+        .bottom {
+            border-top: 1px solid #eee;
+            margin-top: 30px;
+            padding-top: 25px;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .bottom p {
+            color: #777;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        .continue {
+            border: none;
+            background: #5b35d5;
+            color: white;
+
+            padding: 13px 25px;
+
+            border-radius: 8px;
+
+            font-size: 14px;
+            font-weight: 600;
+
+            cursor: pointer;
+        }
+
+        .continue:hover {
+            background: #4824bd;
+        }
+
+        /* MOBILE */
+
+        @media (max-width: 800px) {
+
+            .topbar {
+                padding: 0 20px;
+            }
+
+            .container {
+                margin-top: 35px;
+            }
+
+            .heading h1 {
+                font-size: 32px;
+            }
+
+            .jobs {
+                grid-template-columns: 1fr;
+            }
+
+            .career-box {
+                padding: 25px 20px;
+            }
+
+            .bottom {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .continue {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+
+<body>
+
+    <!-- TOP BAR -->
+
+    <header class="topbar">
+
+        <div class="logo">
+            SkillGap
+        </div>
+
+        <div class="step">
+            Career Setup
+            <span>Step 2 of 2</span>
+        </div>
+
+    </header>
+
+
+    <!-- MAIN -->
+
+    <main class="container">
+
+        <div class="heading">
+
+            <div class="small-title">
+                DREAM JOB
+            </div>
+
+            <h1>
+                Choose Your Dream Career.
+            </h1>
+
+            <p>
+                Select the career you want to build toward.
+                We'll use your choice to create your personalized skill roadmap.
+            </p>
+
+        </div>
+
+
+        <!-- SEARCH -->
+
+        <div class="search">
+
+            <span>⌕</span>
+
+            <input
+                type="text"
+                id="search"
+                placeholder="Search for a career..."
+            >
+
+        </div>
+
+
+        <!-- CAREERS -->
+
+        <section class="career-box">
+
+            <div class="career-heading">
+
+                <h2>
+                    Explore Career Paths
+                </h2>
+
+                <p>
+                    Choose one career that matches your goal.
+                </p>
+
+            </div>
+
+
+            <div class="jobs">
+
+
+                <!-- PYTHON -->
+
+                <div class="job"
+                     data-name="Python Developer">
+
+                    <div class="icon purple">
+                        Py
+                    </div>
+
+                    <div>
+
+                        <h3>
+                            Python Developer
+                        </h3>
+
+                        <p>
+                            Build applications and backend systems using Python.
+                        </p>
+
+                        <div class="tags">
+                            <span>Python</span>
+                            <span>Backend</span>
+                        </div>
+
+                    </div>
+
+                    <div class="check">
+                        ✓
+                    </div>
+
+                </div>
+
+
+                <!-- DATA ANALYST -->
+
+                <div class="job"
+                     data-name="Data Analyst">
+
+                    <div class="icon blue">
+                        DA
+                    </div>
+
+                    <div>
+
+                        <h3>
+                            Data Analyst
+                        </h3>
+
+                        <p>
+                            Analyze data and turn it into useful business insights.
+                        </p>
+
+                        <div class="tags">
+                            <span>SQL</span>
+                            <span>Analytics</span>
+                        </div>
+
+                    </div>
+
+                    <div class="check">
+                        ✓
+                    </div>
+
+                </div>
+
+
+                <!-- WEB -->
+
+                <div class="job"
+                     data-name="Web Developer">
+
+                    <div class="icon orange">
+                        WD
+                    </div>
+
+                    <div>
+
+                        <h3>
+                            Web Developer
+                        </h3>
+
+                        <p>
+                            Create modern and interactive websites and web applications.
+                        </p>
+
+                        <div class="tags">
+                            <span>HTML</span>
+                            <span>JavaScript</span>
+                        </div>
+
+                    </div>
+
+                    <div class="check">
+                        ✓
+                    </div>
+
+                </div>
+
+
+                <!-- SOFTWARE -->
+
+                <div class="job"
+                     data-name="Software Developer">
+
+                    <div class="icon green">
+                        SD
+                    </div>
+
+                    <div>
+
+                        <h3>
+                            Software Developer
+                        </h3>
+
+                        <p>
+                            Design, develop and maintain software applications.
+                        </p>
+
+                        <div class="tags">
+                            <span>Coding</span>
+                            <span>Development</span>
+                        </div>
+
+                    </div>
+
+                    <div class="check">
+                        ✓
+                    </div>
+
+                </div>
+
+
+                <!-- DATA SCIENTIST -->
+
+                <div class="job"
+                     data-name="Data Scientist">
+
+                    <div class="icon pink">
+                        DS
+                    </div>
+
+                    <div>
+
+                        <h3>
+                            Data Scientist
+                        </h3>
+
+                        <p>
+                            Work with data to discover patterns and build intelligent solutions.
+                        </p>
+
+                        <div class="tags">
+                            <span>Python</span>
+                            <span>Data</span>
+                        </div>
+
+                    </div>
+
+                    <div class="check">
+                        ✓
+                    </div>
+
+                </div>
+
+
+                <!-- UI UX -->
+
+                <div class="job"
+                     data-name="UI/UX Designer">
+
+                    <div class="icon teal">
+                        UX
+                    </div>
+
+                    <div>
+
+                        <h3>
+                            UI/UX Designer
+                        </h3>
+
+                        <p>
+                            Design simple, useful and engaging digital experiences.
+                        </p>
+
+                        <div class="tags">
+                            <span>Figma</span>
+                            <span>Design</span>
+                        </div>
+
+                    </div>
+
+                    <div class="check">
+                        ✓
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- BOTTOM -->
+
+            <div class="bottom">
+
+                <p>
+                    Your choice will help SkillGap identify the skills
+                    you need for your selected career.
+                </p>
+
+                <button
+                    class="continue"
+                    onclick="continueNext()">
+
+                    Continue →
+
+                </button>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- JAVASCRIPT -->
+
+    <script>
+
+        const jobs = document.querySelectorAll(".job");
+
+        let selectedJob = "";
+
+
+        // SELECT JOB
+
+        jobs.forEach(function(job) {
+
+            job.addEventListener("click", function() {
+
+                jobs.forEach(function(item) {
+                    item.classList.remove("selected");
+                });
+
+                this.classList.add("selected");
+
+                selectedJob = this.dataset.name;
+
+            });
+
+        });
+
+
+        // SEARCH
+
+        document.getElementById("search").addEventListener(
+            "input",
+            function() {
+
+                const value = this.value.toLowerCase();
+
+                jobs.forEach(function(job) {
+
+                    const name =
+                        job.dataset.name.toLowerCase();
+
+                    if (name.includes(value)) {
+
+                        job.style.display = "flex";
+
+                    } else {
+
+                        job.style.display = "none";
+
+                    }
+
+                });
+
+            }
+        );
+
+
+        // CONTINUE
+
+        function continueNext() {
+
+            if (selectedJob === "") {
+
+                alert("Please select your dream job first.");
+
+                return;
+
+            }
+            localStorage.setItem("dreamjob",selectedJob);
+
+            
+
+            window.location.href =  "/skillgap/?job=" + encodeURIComponent(selectedJob);
+
+        }
+
+    </script>
+<!-- <script src="{% static 'js/dreamjob.js' %}"></script> -->
+</body>
+
+</html>

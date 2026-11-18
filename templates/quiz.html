@@ -1,0 +1,507 @@
+{%load static %} 
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skill Quiz - SkillGap</title>
+       <link rel="stylesheet" href="{% static 'css/quiz.css' %}">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f5f6ff;
+            color: #25253a;
+        }
+
+        .app {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* SIDEBAR */
+
+        .sidebar {
+            width: 250px;
+            background: #17172b;
+            color: white;
+            padding: 25px 18px;
+            min-height: 100vh;
+        }
+
+        .brand {
+            font-size: 26px;
+            font-weight: bold;
+            margin-bottom: 40px;
+            padding-left: 12px;
+        }
+
+        .brand span {
+            color: #8b5cf6;
+        }
+
+        .sidebar nav a {
+            display: block;
+            text-decoration: none;
+            color: #c8c8d8;
+            padding: 14px 12px;
+            margin-bottom: 7px;
+            border-radius: 10px;
+            font-size: 15px;
+        }
+
+        .sidebar nav a:hover,
+        .sidebar nav a.active {
+            background: #302b55;
+            color: white;
+        }
+
+        /* MAIN */
+
+        .main {
+            flex: 1;
+            padding: 35px 45px;
+        }
+
+        .topbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 35px;
+        }
+
+        .topbar h1 {
+            font-size: 27px;
+        }
+
+        .back-btn {
+            text-decoration: none;
+            background: white;
+            color: #6d4aff;
+            border: 1px solid #ddd9ff;
+            padding: 10px 18px;
+            border-radius: 9px;
+            font-weight: bold;
+        }
+
+        /* QUIZ */
+
+        .quiz-container {
+            max-width: 850px;
+            margin: 0 auto;
+        }
+
+        .quiz-header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .quiz-header h2 {
+            font-size: 30px;
+            margin-bottom: 8px;
+        }
+
+        .quiz-header p {
+            color: #77778a;
+        }
+
+        .career-badge {
+            display: inline-block;
+            margin-top: 12px;
+            padding: 8px 15px;
+            background: #eeeaff;
+            color: #6845d8;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .quiz-card {
+            background: white;
+            border-radius: 18px;
+            padding: 32px;
+            box-shadow: 0 8px 30px rgba(40, 35, 90, 0.08);
+        }
+
+        .quiz-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 22px;
+            color: #77778a;
+            font-size: 14px;
+        }
+
+        .progress {
+            height: 8px;
+            background: #eeeeF8;
+            border-radius: 20px;
+            margin-bottom: 30px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            width: 20%;
+            background: #7657e8;
+            border-radius: 20px;
+            transition: 0.3s;
+        }
+
+        .question {
+            font-size: 21px;
+            font-weight: bold;
+            margin-bottom: 25px;
+            line-height: 1.5;
+        }
+
+        .options {
+            display: grid;
+            gap: 13px;
+        }
+
+        .option {
+            width: 100%;
+            text-align: left;
+            padding: 16px;
+            border: 1px solid #ddddea;
+            background: white;
+            border-radius: 11px;
+            cursor: pointer;
+            font-size: 15px;
+            transition: 0.2s;
+        }
+
+        .option:hover {
+            border-color: #7657e8;
+            background: #f7f5ff;
+        }
+
+        .option.selected {
+            border-color: #7657e8;
+            background: #eeeaff;
+            color: #5b3bc4;
+            font-weight: bold;
+        }
+
+        .next-btn {
+            margin-top: 28px;
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 10px;
+            background: #7657e8;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .next-btn:hover {
+            background: #6243d1;
+        }
+
+        /* RESULT */
+
+        .result {
+            display: none;
+            text-align: center;
+        }
+
+        .score-circle {
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+            background: #eeeaff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 20px auto;
+        }
+
+        .score-circle span {
+            font-size: 32px;
+            font-weight: bold;
+            color: #7657e8;
+        }
+
+        .result h2 {
+            font-size: 27px;
+            margin-bottom: 10px;
+        }
+
+        .result p {
+            color: #77778a;
+            margin-bottom: 12px;
+        }
+
+        .result-buttons {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            margin-top: 25px;
+        }
+
+        .result-buttons button,
+        .result-buttons a {
+            padding: 13px 22px;
+            border-radius: 9px;
+            border: none;
+            cursor: pointer;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .retry {
+            background: #7657e8;
+            color: white;
+        }
+
+        .dashboard {
+            background: #eeeeF8;
+            color: #333;
+        }
+
+        @media(max-width: 800px) {
+
+            .sidebar {
+                display: none;
+            }
+
+            .main {
+                padding: 25px 15px;
+            }
+
+            .quiz-card {
+                padding: 22px;
+            }
+
+            .topbar h1 {
+                font-size: 22px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="app">
+
+    <!-- SIDEBAR -->
+
+    <aside class="sidebar">
+
+        <div class="brand">
+            Skill<span>Gap</span>
+        </div>
+
+        <nav>
+
+            <a href="/dashboard/">
+                🏠 Dashboard
+            </a>
+
+            <a href="/skill_assesment/">
+                📋 Skill Assessment
+            </a>
+
+            <a href="/dreamjob/">
+                🎯 Dream Job
+            </a>
+
+            <a href="/skillgap/">
+                📊 Skill Gap Analysis
+            </a>
+
+            <a href="/learning_roadmap/">
+                🗺️ Learning Roadmap
+            </a>
+
+            <a href="/quiz/" class="active">
+                🧠 Skill Quiz
+            </a>
+
+            <a href="/resume_analysis/">
+                📄 Upload Resume
+            </a>
+
+            <a href="/profile/">
+                👤 Profile
+            </a>
+
+            <a href="/settings/">
+                ⚙️ Settings
+            </a>
+
+        </nav>
+
+    </aside>
+
+
+    <!-- MAIN -->
+
+    <main class="main">
+
+        <div class="topbar">
+
+            <h1>Skill Quiz</h1>
+
+            <a href="/dashboard/" class="back-btn">
+                ← Dashboard
+            </a>
+
+        </div>
+
+
+        <div class="quiz-container">
+
+            <div class="quiz-header">
+
+                <h2 id="quizTitle">
+                    Skill Quiz
+                </h2>
+
+                <p>
+                    Test the skills required for your dream career.
+                </p>
+
+                <div
+                    class="career-badge"
+                    id="careerBadge">
+                    Career
+                </div>
+
+            </div>
+
+
+            <div class="quiz-card">
+
+                <!-- QUIZ -->
+
+                <div id="quiz">
+
+                    <div class="quiz-info">
+
+                        <span id="questionNumber">
+                            Question 1 of 5
+                        </span>
+
+                        <span id="scoreText">
+                            Score: 0
+                        </span>
+
+                    </div>
+
+
+                    <div class="progress">
+
+                        <div
+                            class="progress-bar"
+                            id="progressBar">
+                        </div>
+
+                    </div>
+
+
+                    <div
+                        class="question"
+                        id="question">
+                    </div>
+
+
+                    <div
+                        class="options"
+                        id="options">
+                    </div>
+
+
+                    <button
+                        
+                        class="next-btn"
+                        id="nextBtn"
+                        
+                        onclick="nextQuestion()">
+                         Next Question →
+
+                    </button>
+
+                </div>
+
+
+                <!-- RESULT -->
+
+                <div
+                    class="result"
+                    id="result">
+
+                    <h2>
+                        Quiz Completed!
+                    </h2>
+
+                    <div class="score-circle">
+
+                        <span id="finalScore">
+                            0%
+                        </span>
+
+                    </div>
+
+                    <p id="resultMessage">
+                        Great job!
+                    </p>
+
+                    <p id="resultDetails">
+                    </p>
+
+
+                    <div class="result-buttons">
+
+                        <button
+                            class="retry"
+                            onclick="restartQuiz()">
+
+                            Try Again
+
+                        </button>
+
+                        <a
+                            href="/dashboard/"
+                            class="dashboard">
+
+                            Dashboard
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </main>
+
+</div>
+<script>
+const selectedCareer = "{{ dream_job|escapejs }}";
+const urlParams = new URLSearchParams(window.location.search);
+const careerFromUrl = urlParams.get("job");
+
+if (careerFromUrl) {
+    localStorage.setItem("dreamJob", careerFromUrl);
+} else if (selectedCareer) {
+    localStorage.setItem("dreamJob", selectedCareer);
+}
+</script>
+<script src ="{% static 'js/quiz.js'%}"></script>
+</body>
+</html>
+
+
+

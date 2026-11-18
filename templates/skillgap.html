@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skill Gap Analysis - SkillGap</title>
+    <link rel="stylesheet" href="{% static 'css/skillgap.css' %}">
+</head>
+
+<body>
+<div class="app">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+        <div class="logo">SkillGap</div>
+
+        <nav>
+            <a href="/dashboard/">🏠 Dashboard</a>
+            <a href="/skill_assesment/">📋 Skill Assessment</a>
+            <a href="/dreamjob/">🎯 Dream Job</a>
+            <a href="/learning_roadmap/">🗺️ Career Roadmap</a>
+            <a href="/resume_analysis/">📄 Upload Resume</a>
+        </nav>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="main">
+
+        <div class="top">
+            <div>
+                <h1>Skill Gap Analysis</h1>
+                <p>Identify your missing skills and build your career roadmap.</p>
+            </div>
+        </div>
+
+        <!-- HEADER CARD -->
+        <section class="welcome-card">
+            <div>
+                <span class="small-title">CAREER SKILL ANALYZER</span>
+                <h2>Find Your Skill Gap</h2>
+                <p>
+                    Compare your current skills with the skills required
+                    for your dream career.
+                </p>
+            </div>
+
+            <div class="score-circle">
+                <strong id="score">{{ match_percentage|default:0 }}%</strong>
+                <span>Estimated Skill Match</span>
+            </div>
+        </section>
+
+        <!-- SELECTED CAREER -->
+        <section class="card">
+            <div class="card-title">
+                <h2>Selected Career</h2>
+            </div>
+
+            <div class="career-box">
+                <div class="career-icon">💻</div>
+                <div>
+                    <h3 id="career">
+                        {{ dream_job|default:"No career selected" }}
+                    </h3>
+                    <p>Career-specific skill analysis</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- YOUR SKILL ANALYSIS -->
+        <section class="card">
+            <div class="card-title">
+                <h2>Your Skill Analysis</h2>
+                <span>Current Level</span>
+            </div>
+
+            {% for item in analysis %}
+                <div class="skill">
+                    <div class="skill-info">
+                        <span>{{ item.name }}</span>
+                        <b>{{ item.current_level }} — {{ item.percentage }}%</b>
+                    </div>
+
+                    <div class="progress">
+                        <div class="bar"
+                             style="width: {{ item.percentage }}%">
+                        </div>
+                    </div>
+                </div>
+            {% empty %}
+                <p>
+                    No skills found. Please complete your Skill Assessment
+                    and select your Dream Job.
+                </p>
+            {% endfor %}
+        </section>
+
+        <!-- SKILLS TO IMPROVE -->
+        <section class="card">
+            <div class="card-title">
+                <h2>Skills You Need to Improve</h2>
+            </div>
+
+            <div class="gap-list">
+                {% for item in analysis %}
+                    {% if item.gap != "Strong" %}
+                        <div class="gap-item">
+                            <div class="gap-icon">📌</div>
+
+                            <div>
+                                <h3>{{ item.name }}</h3>
+                                <p>
+                                    Current level: {{ item.current_level }}.
+                                    {{ item.gap }}
+                                </p>
+                            </div>
+
+                            <span class="badge">{{ item.gap }}</span>
+                        </div>
+                    {% endif %}
+                {% empty %}
+                    <p>
+                        Your skill analysis will appear here after assessment.
+                    </p>
+                {% endfor %}
+            </div>
+        </section>
+
+        <!-- NEXT BUTTON -->
+        <button class="roadmap-btn" onclick="goToQuiz()">
+            Continue to Quiz →
+        </button>
+
+    </main>
+</div>
+
+<script>
+    function goToQuiz() {
+        window.location.href = "/quiz/";
+    }
+</script>
+
+<script src="{% static 'js/skillgap.js' %}"></script>
+</body>
+</html>

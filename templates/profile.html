@@ -1,0 +1,329 @@
+{% load static%}
+ <link rel="stylesheet" href="{% static 'css/profile.css' %}">
+ <script src="{% static 'js/profile.js' %}"></script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Profile - SkillGap</title>
+
+    
+</head>
+
+<body>
+
+<div class="app">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+
+        <div class="logo">SkillGap</div>
+
+        <nav>
+
+            <a href="/dashboard/">
+                🏠 <span>Dashboard</span>
+            </a>
+
+            <a href="/skill_assesment/">
+                📋 <span>Skill Assessment</span>
+            </a>
+
+            <a href="/dreamjob/">
+                🎯 <span>Dream Job</span>
+            </a>
+
+            <a href="/skillgap/">
+                📊 <span>Skill Gap Analysis</span>
+            </a>
+
+            <a href="/learning_roadmap/">
+                🗺️ <span>Learning Roadmap</span>
+            </a>
+
+            <a href="/resume_analysis/">
+                📄 <span>Upload Resume</span>
+            </a>
+
+            <a href="/profile/" class="active">
+                👤 <span>Profile</span>
+            </a>
+
+        </nav>
+
+    </aside>
+
+
+    <!-- MAIN -->
+    <main class="main">
+
+        <div class="heading">
+
+            <span>MY ACCOUNT</span>
+
+            <h1>Profile</h1>
+
+            <p>
+                View and manage your SkillGap profile.
+            </p>
+
+        </div>
+
+
+        <!-- PROFILE HEADER -->
+
+        <section class="profile-header">
+
+            <div class="avatar" id="avatar">
+                ?
+            </div>
+
+            <div class="profile-title">
+
+                <h2 id="displayName">
+                    Your Name
+                </h2>
+
+                <p id="displayEmail">
+                    Your email address
+                </p>
+
+                <span id="displayJob">
+                    Dream Career not selected
+                </span>
+
+            </div>
+
+        </section>
+
+
+        <!-- PERSONAL DETAILS -->
+
+        <section class="card">
+
+            <div class="card-heading">
+
+                <div>
+                    <h2>Personal Details</h2>
+
+                    <p>
+                        Enter your basic information.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="form-grid">
+
+                <div class="input-group">
+
+                    <label>Full Name</label>
+
+                    <input
+                        type="text"
+                        id="name"
+                        placeholder="Enter your full name"
+                    >
+
+                </div>
+
+
+                <div class="input-group">
+
+                    <label>Email Address</label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        placeholder="Enter your email address"
+                    >
+
+                </div>
+
+
+                <div class="input-group">
+
+                    <label>Education</label>
+
+                    <input
+                        type="text"
+                        id="education"
+                        placeholder="Example: B.Tech CSE"
+                    >
+
+                </div>
+
+
+                <div class="input-group">
+
+                    <label>College / University</label>
+
+                    <input
+                        type="text"
+                        id="college"
+                        placeholder="Enter your college name"
+                    >
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- CAREER DETAILS -->
+
+        <section class="card">
+
+            <div class="card-heading">
+
+                <div>
+                    <h2>Career Details</h2>
+
+                    <p>
+                        Tell us about your career goal.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="form-grid">
+
+                <div class="input-group">
+
+                    <label>Dream Job</label>
+
+                    <select id="dreamJob">
+
+                        <option value="">
+                            Select your dream job
+                        </option>
+
+                        <option value="Python Developer">
+                            Python Developer
+                        </option>
+
+                        <option value="Data Analyst">
+                            Data Analyst
+                        </option>
+
+                        <option value="Web Developer">
+                            Web Developer
+                        </option>
+
+                        <option value="Software Developer">
+                            Software Developer
+                        </option>
+
+                        <option value="Data Scientist">
+                            Data Scientist
+                        </option>
+
+                        <option value="UI/UX Designer">
+                            UI/UX Designer
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="input-group">
+
+                    <label>Current Skill Level</label>
+
+                    <select id="skillLevel">
+
+                        <option value="">
+                            Select your skill level
+                        </option>
+
+                        <option value="Beginner">
+                            Beginner
+                        </option>
+
+                        <option value="Intermediate">
+                            Intermediate
+                        </option>
+
+                        <option value="Advanced">
+                            Advanced
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- SKILLS -->
+
+        <section class="card">
+
+            <div class="card-heading">
+
+                <div>
+                    <h2>My Skills</h2>
+
+                    <p>
+                        Add the skills you currently know.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="skills-box">
+
+                <input
+                    type="text"
+                    id="skillInput"
+                    placeholder="Example: Python, HTML, MySQL"
+                >
+
+                <p>
+                    Separate multiple skills using commas.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- BUTTONS -->
+
+        <div class="buttons">
+
+            <button
+                class="save-btn"
+                onclick="saveProfile()"
+            >
+                Save Profile
+            </button>
+
+
+            <button
+                class="cancel-btn"
+                onclick="goDashboard()"
+            >
+                Back to Dashboard
+            </button>
+
+        </div>
+
+
+    </main>
+
+</div>
+
+
+
+</body>
+</html>

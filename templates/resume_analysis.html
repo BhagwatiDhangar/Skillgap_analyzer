@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Resume Analysis - SkillGap</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    background:#f5f6fb;
+    color:#222;
+}
+
+/* SIDEBAR */
+
+.sidebar{
+    position:fixed;
+    left:0;
+    top:0;
+    width:230px;
+    height:100vh;
+    background:#5546d9;
+    color:white;
+    padding:30px 15px;
+}
+
+.logo{
+    font-size:28px;
+    font-weight:bold;
+    margin:0 15px 35px;
+}
+
+.menu a{
+    display:block;
+    color:white;
+    text-decoration:none;
+    padding:13px 15px;
+    margin:5px 0;
+    border-radius:10px;
+}
+
+.menu a:hover{
+    background:rgba(255,255,255,0.2);
+}
+
+/* MAIN */
+
+.main{
+    margin-left:230px;
+    padding:35px;
+}
+
+h1{
+    font-size:30px;
+    margin-bottom:5px;
+}
+
+.subtitle{
+    color:#777;
+    margin-bottom:25px;
+}
+
+/* UPLOAD BOX */
+
+.upload-box{
+    background:white;
+    padding:30px;
+    border-radius:18px;
+    text-align:center;
+    box-shadow:0 3px 12px rgba(0,0,0,0.06);
+    margin-bottom:25px;
+}
+
+.upload-icon{
+    font-size:45px;
+    margin-bottom:10px;
+}
+
+.upload-box h2{
+    margin-bottom:8px;
+}
+
+.upload-box p{
+    color:#777;
+    margin-bottom:20px;
+}
+
+.file-label{
+    display:inline-block;
+    background:#5546d9;
+    color:white;
+    padding:12px 25px;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+#resume{
+    display:none;
+}
+
+#fileName{
+    margin-top:15px;
+    color:#5546d9;
+    font-weight:bold;
+}
+
+.analyze-btn{
+    width:100%;
+    margin-top:20px;
+    padding:14px;
+    border:none;
+    border-radius:9px;
+    background:#5546d9;
+    color:white;
+    font-size:16px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.analyze-btn:hover{
+    background:#4032bd;
+}
+
+/* RESULT */
+
+#result{
+    display:none;
+}
+
+/* SCORE */
+
+.score-box{
+    background:linear-gradient(120deg,#5546d9,#7869ee);
+    color:white;
+    padding:30px;
+    border-radius:18px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:25px;
+}
+
+.score-text h2{
+    margin-bottom:8px;
+}
+
+.score-text p{
+    opacity:.9;
+}
+
+/* CIRCLE */
+
+.circle{
+    width:140px;
+    height:140px;
+    border-radius:50%;
+    background:conic-gradient(
+        white 0deg 280deg,
+        rgba(255,255,255,.25) 280deg 360deg
+    );
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    position:relative;
+}
+
+.circle:after{
+    content:"";
+    position:absolute;
+    width:105px;
+    height:105px;
+    background:#6354df;
+    border-radius:50%;
+}
+
+.percent{
+    position:relative;
+    z-index:2;
+    font-size:30px;
+    font-weight:bold;
+}
+
+/* CARDS */
+
+.cards{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px;
+}
+
+.card{
+    background:white;
+    padding:25px;
+    border-radius:16px;
+    box-shadow:0 3px 12px rgba(0,0,0,0.05);
+}
+
+.card h2{
+    font-size:19px;
+    margin-bottom:20px;
+}
+
+/* SKILLS */
+
+.skill{
+    margin-bottom:18px;
+}
+
+.skill-name{
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:7px;
+}
+
+.skill-name b{
+    color:#5546d9;
+}
+
+.bar{
+    height:9px;
+    background:#eeeeee;
+    border-radius:20px;
+}
+
+.fill{
+    height:100%;
+    background:#5546d9;
+    border-radius:20px;
+}
+
+/* ITEMS */
+
+.item{
+    margin-bottom:18px;
+}
+
+.item strong{
+    display:block;
+    margin-bottom:5px;
+}
+
+.item p{
+    color:#777;
+    font-size:14px;
+    line-height:1.5;
+}
+
+/* TAGS */
+
+.tags{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+}
+
+.tag{
+    background:#eeecff;
+    color:#5546d9;
+    padding:8px 12px;
+    border-radius:20px;
+    font-size:13px;
+}
+
+/* BACK */
+
+.back{
+    display:inline-block;
+    margin-top:
+    25px;
+    background:#5546d9;
+    color:white;
+    text-decoration:none;
+    padding:12px 22px;
+    border-radius:8px;
+}
+
+@media(max-width:800px){
+
+    .sidebar{
+        width:70px;
+    }
+
+    .logo{
+        font-size:15px;
+        margin-left:5px;
+    }
+
+    .menu span{
+        display:none;
+    }
+
+    .main{
+        margin-left:70px;
+        padding:20px;
+    }
+
+    .cards{
+        grid-template-columns:1fr;
+    }
+
+    .score-box{
+        flex-direction:column;
+        text-align:center;
+        gap:20px;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="sidebar">
+
+    <div class="logo">SkillGap</div>
+
+    <div class="menu">
+
+        <a href="/dashboard/">
+            🏠 <span>Dashboard</span>
+        </a>
+
+        <a href="/skill_assesment/">
+            📋 <span>Skill Assessment</span>
+        </a>
+
+        <a href="/dreamjob/">
+            🎯 <span>Dream Job</span>
+        </a>
+
+        <a href="/skillgap/">
+            📊 <span>Skill Gap Analysis</span>
+        </a>
+
+        <a href="/learning_roadmap/">
+            🗺️ <span>Learning Roadmap</span>
+        </a>
+
+        <a href="/resume_analysis/">
+            📄 <span>Resume Analysis</span>
+        </a>
+
+        <a href="/profile/">
+            👤 <span>Profile</span>
+        </a>
+
+        <a href="/settings/">
+            ⚙️ <span>Settings</span>
+        </a>
+
+    </div>
+
+</div>
+
+
+<div class="main">
+
+    <h1>Resume Analysis</h1>
+
+    <p class="subtitle">
+        Upload your resume and analyze your career readiness.
+    </p>
+
+
+    <div class="upload-box">
+
+        <div class="upload-icon">📄</div>
+
+        <h2>Upload Your Resume</h2>
+
+        <p>
+            Upload your PDF resume to get a quick analysis.
+        </p>
+
+        <label for="resume" class="file-label">
+            Choose Resume
+        </label>
+
+        <input type="file" id="resume" accept=".pdf">
+
+        <div id="fileName">
+            No resume selected
+        </div>
+
+        <button class="analyze-btn" onclick="analyzeResume()">
+            Analyze Resume →
+        </button>
+
+    </div>
+
+
+    <div id="result">
+
+        <div class="score-box">
+
+            <div class="score-text">
+
+                <h2>Resume Analysis Result</h2>
+
+                <p>
+                    Your resume has a good foundation.
+                </p>
+
+            </div>
+
+            <div class="circle">
+
+                <div class="percent">
+                    78%
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="cards">
+
+
+            <div class="card">
+
+                <h2>📊 Skills Detected</h2>
+
+                <div class="skill">
+
+                    <div class="skill-name">
+                        <span>Python</span>
+                        <b>85%</b>
+                    </div>
+
+                    <div class="bar">
+                        <div class="fill" style="width:85%;"></div>
+                    </div>
+
+                </div>
+
+
+                <div class="skill">
+
+                    <div class="skill-name">
+                        <span>SQL / MySQL</span>
+                        <b>78%</b>
+                    </div>
+
+                    <div class="bar">
+                        <div class="fill" style="width:78%;"></div>
+                    </div>
+
+                </div>
+
+
+                <div class="skill">
+
+                    <div class="skill-name">
+                        <span>HTML & CSS</span>
+                        <b>82%</b>
+                    </div>
+
+                    <div class="bar">
+                        <div class="fill" style="width:82%;"></div>
+                    </div>
+
+                </div>
+
+
+                <div class="skill">
+
+                    <div class="skill-name">
+                        <span>JavaScript</span>
+                        <b>65%</b>
+                    </div>
+
+                    <div class="bar">
+                        <div class="fill" style="width:65%;"></div>
+                    </div>
+
+                </div>
+
+
+                <div class="skill">
+
+                    <div class="skill-name">
+                        <span>Git & GitHub</span>
+                        <b>70%</b>
+                    </div>
+
+                    <div class="bar">
+                        <div class="fill" style="width:70%;"></div>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="card">
+
+                <h2>✅ Strengths</h2>
+
+                <div class="item">
+
+                    <strong>Technical Skills</strong>
+
+                    <p>
+                        Good combination of programming,
+                        database and web development skills.
+                    </p>
+
+                </div>
+
+                <div class="item">
+
+                    <strong>Projects</strong>
+
+                    <p>
+                        Projects demonstrate practical
+                        application of technical knowledge.
+                    </p>
+
+                </div>
+
+                <div class="item">
+
+                    <strong>Education</strong>
+
+                    <p>
+                        Education information is clearly
+                        presented.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="card">
+
+                <h2>⚠️ Areas to Improve</h2>
+
+                <div class="item">
+
+                    <strong>Measurable Results</strong>
+
+                    <p>
+                        Add numbers and measurable outcomes
+                        to project descriptions.
+                    </p>
+
+                </div>
+
+                <div class="item">
+
+                    <strong>JavaScript</strong>
+
+                    <p>
+                        Add more practical JavaScript projects.
+                    </p>
+
+                </div>
+
+                <div class="item">
+
+                    <strong>GitHub</strong>
+
+                    <p>
+                        Add GitHub projects and contribution
+                        information.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="card">
+
+                <h2>📌 Resume Checklist</h2>
+
+                <p style="color:#777;margin-bottom:15px;">
+                    Recommended resume sections:
+                </p>
+
+                <div class="tags">
+
+                    <div class="tag">Projects ✓</div>
+
+                    <div class="tag">Education ✓</div>
+
+                    <div class="tag">Technical Skills ✓</div>
+
+                    <div class="tag">Certifications</div>
+
+                    <div class="tag">Achievements</div>
+
+                    <div class="tag">GitHub</div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <a href="/dashboard/" class="back">
+            ← Back to Dashboard
+        </a>
+
+    </div>
+
+</div>
+
+
+<script>
+
+var resumeInput = document.getElementById("resume");
+
+var fileName = document.getElementById("fileName");
+
+
+resumeInput.onchange = function(){
+
+    if(resumeInput.files.length > 0){
+
+        fileName.innerHTML =
+            "Selected: " + resumeInput.files[0].name;
+
+    }
+
+};
+
+
+function analyzeResume(){
+
+    if(resumeInput.files.length === 0){
+
+        alert("Please choose a PDF resume first.");
+
+        return;
+
+    }
+
+    document.getElementById("result").style.display = "block";
+
+    document.getElementById("result").scrollIntoView({
+        behavior:"smooth"
+    });
+
+}
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,442 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/skill_assesment.css' %}">
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Skill Assessment - SkillGap</title>
+
+</head>
+
+
+<body>
+
+
+    <!-- TOP BAR -->
+
+    <div class="topbar">
+
+        <div class="logo">
+            SkillGap
+        </div>
+
+        <div class="page-name">
+            Skill Assessment
+        </div>
+
+    </div>
+
+
+    <!-- MAIN -->
+
+    <div class="container">
+
+
+        <div class="heading">
+
+            <div class="small-title">
+                SKILL ASSESSMENT
+            </div>
+
+            <h1>
+                Assess Your Current Skills
+            </h1>
+
+            <p>
+                Select your current level for each technical skill.
+            </p>
+
+        </div>
+
+
+        <!-- CARD -->
+
+        <div class="card">
+
+            <div class="card-header">
+
+                <h2>
+                    Technical Skills
+                </h2>
+
+                <p>
+                    Choose Beginner, Intermediate or Advanced.
+                </p>
+
+            </div>
+
+
+            <!-- PYTHON -->
+
+            <div class="skill">
+
+                <div class="skill-info">
+
+                    <div>
+                        <div class="skill-name">
+                            Python
+                        </div>
+
+                        <span class="category">
+                            Programming
+                        </span>
+                    </div> 
+
+                 </div>
+
+                <div class="levels">
+
+                    <button class="level"
+                        onclick="selectLevel(this, 'Python', 'Beginner')">
+                        Beginner
+                    </button>
+
+                    <button class="level"
+                        onclick="selectLevel(this, 'Python', 'Intermediate')">
+                        Intermediate
+                    </button>
+
+                    <button class="level"
+                        onclick="selectLevel(this, 'Python', 'Advanced')">
+                        Advanced
+                    </button> 
+
+                 </div>
+
+            </div>
+
+
+            <!-- HTML CSS -->
+
+             <div class="skill">
+
+                <div class="skill-info">
+
+                    <div>
+                        <div class="skill-name">
+                            HTML & CSS
+                        </div>
+
+                        <span class="category">
+                            Web Development
+                        </span>
+                    </div>
+
+                </div>
+
+                 <div class="levels">
+
+                    <button class="level"
+                        onclick="selectLevel(this, 'HTML & CSS', 'Beginner')">
+                        Beginner
+                    </button>
+
+                    <button class="level"
+                        onclick="selectLevel(this, 'HTML & CSS', 'Intermediate')">
+                        Intermediate
+                    </button>
+
+                    <button class="level"
+                        onclick="selectLevel(this, 'HTML & CSS', 'Advanced')">
+                        Advanced
+                    </button>
+
+                </div>
+
+            </div> 
+
+
+            <!-- JAVASCRIPT -->
+
+             <div class="skill"> 
+
+                 <div class="skill-info">
+
+                    <div> 
+                         <div class="skill-name"> 
+                             JavaScript
+                        </div>
+
+                        <span class="category">
+                            Web Development
+                        </span>
+                    </div>
+
+                </div>
+
+                <div class="levels">
+
+                    <button class="level"
+                        onclick="selectLevel(this, 'JavaScript', 'Beginner')">
+                        Beginner
+                    </button> 
+
+                    <JavaScript', 'Intermediate')">
+                         Intermediate
+                    </button>
+
+                    <button class="level"
+                        onclick="selectLevel(this, 'JavaScript', 'Advanced')">
+                        Advanced
+                    </button>
+
+                </div>
+
+            </div>
+
+ 
+            MYSQL
+ 
+            <div class="skill">
+
+                <div class="skill-info">
+
+                    <div>
+                        <div class="skill-name">
+                            MySQL
+                        </div>
+
+                        <span class="category">
+                            Database
+                        </span>
+                    </div>
+
+                </div>
+
+                <div class="levels">
+
+                    <button class="level"
+                        onclick="selectLevel(this, 'MySQL', 'Beginner')">
+                        Beginner
+                    </button>
+
+                    <button class="level"
+                        onclick="selectLevel(this, 'MySQL', 'Intermediate')">
+                        Intermediate
+                    </button>
+
+                    <button class="level"
+                        onclick="selectLevel(this, 'MySQL', 'Advanced')">
+                        Advanced
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!--GIT -->
+
+            <div class="skill">
+
+                <div class="skill-info">
+
+                    <div>
+                        <div class="skill-name"> 
+                            Git & GitHub
+                        </div>
+
+                        <span class="category">
+                            Version Control
+                        </span>
+                    </div>
+
+                </div> 
+
+                <div class="levels">
+
+                    <button class="level"
+                        onclick="selectLevel(this, 'Git & GitHub', 'Beginner')">
+                        Beginner
+                    </button>
+
+                    <button class="level"
+                        onclick="selectLevel(this, 'Git & GitHub', 'Intermediate')">
+                        Intermediate
+                    </button>
+
+                    <button class="level"
+                        onclick="selectLevel(this, 'Git & GitHub', 'Advanced')">
+                        Advanced
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <button
+                class="continue"
+                onclick="continueAssessment()">
+
+                Continue to Dashboard →
+
+            </button>
+
+            <a
+                href="/dashboard/"
+                class="back">
+
+                ← Back to Dashboard
+
+            </a>
+
+        </div>
+
+    </div>
+     <script>
+        let selectedSkills = {};
+
+         function selectLevel(button, skill, level) {
+             const parent = button.parentElement;
+
+        parent.querySelectorAll(".level").forEach(function(btn) {
+            btn.classList.remove("selected");
+        });
+
+             button.classList.add("selected");
+             selectedSkills[skill] = level;
+          }
+
+         function getCookie(name) {
+             let cookieValue = null;
+
+              if (document.cookie && document.cookie !== "") {
+                    const cookies = document.cookie.split(";");
+
+                    for (let cookie of cookies) {
+                       cookie = cookie.trim();
+
+                      if (cookie.startsWith(name + "=")) {
+                          cookieValue = decodeURIComponent(
+                           cookie.substring(name.length + 1)
+                         );
+                          break;
+                }
+            }
+        }
+
+                   return cookieValue;
+    }
+
+            async function continueAssessment() {
+              const requiredSkills = [
+            "Python",
+            "HTML & CSS",
+            "JavaScript",
+            "MySQL",
+            "Git & GitHub"
+        ];
+
+               for (const skill of requiredSkills) {
+                 if (!selectedSkills[skill]) {
+                   alert("Please select your level for " + skill + ".");
+                   return;
+            }
+        }
+
+                 const formData = new URLSearchParams();
+
+               for (const skill of requiredSkills) {
+                  formData.append(skill, selectedSkills[skill]);
+        }
+
+              try {
+                  const response = await fetch(window.location.pathname, {
+                  method: "POST",
+                 headers: {
+                    "Content-Type": "application/x-www-form-urlencoded",
+                    "X-CSRFToken": getCookie("csrftoken")
+                },
+                 body: formData.toString()
+            });
+
+                  if (response.redirected) {
+                    window.location.href = response.url;
+                    return;
+            }
+
+                  if (!response.ok) {
+                     throw new Error("Assessment save failed");
+            }
+
+                   alert("Skills saved successfully!");
+                    } catch (error) {
+                       console.error(error);
+                      alert("Skills save nahi hui. Dobara try karo.");
+        }
+    }
+</script>
+</body>
+</html>
+
+    <!-- <script>
+
+        let selectedSkills = {};
+
+
+        function selectLevel(button, skill, level) {
+
+            const parent = button.parentElement;
+
+            const buttons = parent.querySelectorAll(".level");
+
+            buttons.forEach(function(btn) {
+                btn.classList.remove("selected");
+            });
+
+            button.classList.add("selected");
+
+            selectedSkills[skill] = level;
+
+        }
+
+
+        function continueAssessment() {
+
+            const requiredSkills = [
+                "Python",
+                "HTML & CSS",
+                "JavaScript",
+                "MySQL",
+                "Git & GitHub"
+            ];
+
+            for (let skill of requiredSkills) {
+
+                if (!selectedSkills[skill]) {
+
+                    alert(
+                        "Please select your level for " + skill + "."
+                    );
+
+                    return;
+                }
+
+            }
+
+
+            localStorage.setItem(
+                "skillAssessment",
+                JSON.stringify(selectedSkills)
+            );
+
+
+            alert(
+                "Skill Assessment completed successfully!"
+            );
+
+            const selectedJob="{{ selected_job|escapejs }}";
+            window.location.href = "/quiz/?job=";+encodeURIComponent(selectedJob);
+
+        }
+
+    </script>
+
+
+</body>
+
+</html> -->

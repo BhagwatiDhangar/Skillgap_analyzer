@@ -1,0 +1,521 @@
+
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkillGap Dashboard</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f5f6fb;
+            color: #222;
+        }
+
+        /* SIDEBAR */
+
+        .sidebar {
+            position: fixed;
+            width: 230px;
+            height: 100vh;
+            background: #5546d9;
+            color: white;
+            padding: 30px 15px;
+            overflow-y: auto;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            margin: 0 15px 35px;
+        }
+
+        .menu a {
+            display: block;
+            color: white;
+            text-decoration: none;
+            padding: 13px 15px;
+            margin: 5px 0;
+            border-radius: 10px;
+            font-size: 14px;
+        }
+
+        .menu a:hover,
+        .menu a.active {
+            background: rgba(255,255,255,0.20);
+        }
+
+
+        /* MAIN */
+
+        .main {
+            margin-left: 230px;
+            padding: 35px;
+        }
+
+        h1 {
+            margin-bottom: 5px;
+        }
+
+        .subtitle {
+            color: #777;
+            margin-bottom: 25px;
+        }
+
+
+        /* WELCOME */
+
+        .welcome {
+            background: linear-gradient(120deg,#5546d9,#7869ee);
+            color: white;
+            padding: 28px;
+            border-radius: 18px;
+            margin-bottom: 25px;
+        }
+
+        .welcome h2 {
+            margin-bottom: 8px;
+        }
+
+
+        /* STATS */
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(4,1fr);
+            gap: 18px;
+            margin-bottom: 25px;
+        }
+
+        .box {
+            background: white;
+            padding: 22px;
+            border-radius: 15px;
+            box-shadow: 0 3px 12px rgba(0,0,0,.06);
+        }
+
+        .number {
+            font-size: 28px;
+            font-weight: bold;
+            color: #5546d9;
+            margin-top: 10px;
+        }
+
+
+        /* SECTION */
+
+        .section {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 25px;
+        }
+
+
+        /* SKILLS */
+
+        .skill {
+            margin: 18px 0;
+        }
+
+        .skill-top {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 7px;
+        }
+
+        .bar {
+            height: 9px;
+            background: #eee;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        .fill {
+            height: 100%;
+            background: #5546d9;
+            border-radius: 20px;
+        }
+
+
+        /* QUICK ACTIONS */
+
+        .actions {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .action {
+            padding: 18px;
+            border: 1px solid #ddd;
+            border-radius: 12px;
+            cursor: pointer;
+            text-decoration: none;
+            color: #222;
+            min-width: 190px;
+            transition: 0.2s;
+        }
+
+        .action:hover {
+            border-color: #5546d9;
+            background: #faf9ff;
+        }
+
+        .action h3 {
+            margin: 8px 0;
+        }
+
+        .action p {
+            color: #777;
+            font-size: 13px;
+        }
+
+
+        /* ROADMAP */
+
+        .roadmap-item {
+            padding: 13px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .roadmap-item:last-child {
+            border-bottom: none;
+        }
+
+
+        /* MOBILE */
+
+        @media(max-width:800px) {
+
+            .sidebar {
+                width: 70px;
+            }
+
+            .logo {
+                font-size: 15px;
+                margin-left: 5px;
+            }
+
+            .menu a span {
+                display: none;
+            }
+
+            .menu a {
+                text-align: center;
+                padding: 13px 5px;
+            }
+
+            .main {
+                margin-left: 70px;
+                padding: 20px;
+            }
+
+            .stats {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media(max-width:500px) {
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+            .actions {
+                flex-direction: column;
+            }
+
+            .action {
+                width: 100%;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <!-- = SIDEBAR = -->
+
+    <div class="sidebar">
+
+        <div class="logo">
+            SkillGap
+        </div>
+
+        <div class="menu">
+
+            <a href="/dashboard/" class="active">
+                🏠 <span>Dashboard</span>
+            </a>
+
+            <a href="/skill_assesment/">
+                📋 <span>Skill Assessment</span>
+            </a>
+
+            <a href="/dreamjob/">
+                🎯 <span>Dream Job</span>
+            </a>
+
+            <a href="/skillgap/">
+                📊 <span>Skill Gap Analysis</span>
+            </a>
+
+            <a href="/learning_roadmap/">
+                🗺️ <span>Learning Roadmap</span>
+            </a>
+
+            <a href="/quiz/">
+                🧠 <span>Skill Quiz</span>
+            </a>
+
+            <a href="/resume_analysis/">
+                📄 <span>Upload Resume</span>
+            </a>
+
+            <a href="/profile/">
+                👤 <span>Profile</span>
+            </a>
+
+            <a href="/settings/">
+                ⚙️ <span>Settings</span>
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <!-- = MAIN =-->
+
+    <div class="main">
+
+        <h1>Dashboard</h1>
+
+        <p class="subtitle">
+            Track your skills and build your career.
+        </p>
+
+
+        <!-- WELCOME -->
+
+        <div class="welcome">
+
+            <h2>Hello Dear 👋</h2>
+
+            <p>
+                Welcome back to SkillGap. Let's work on your career goals.
+            </p>
+
+        </div>
+
+
+        <!-- STATS -->
+
+          <!-- STATS -->
+
+        <div class="stats">
+
+            <div class="box">
+                Latest Quiz Score
+                <div class="number">
+                    {% for result in quiz_results %}
+                        {% if forloop.first %}
+                            {{ result.score }}/{{ result.total_questions }}
+                        {% endif %}
+                    {% empty %}
+                        Not attempted
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="box">
+                Skills Assessed
+                <div class="number">{{ skill_assessments|length }}</div>
+            </div>
+
+            <div class="box">
+                Skill Gaps
+                <div class="number">{{ skill_gaps}}</div>
+            </div>
+
+            <div class="box">
+                Career Progress
+                <div class="number">{{ career_progress}}%</div>
+            </div>
+
+        </div>
+
+
+        <!-- SKILLS -->
+
+        <div class="section">
+
+            <h2>📊 My Skill Progress</h2>
+
+            <p>Your saved skill levels are shown below.</p>
+
+            {% for skill in skill_assessments %}
+
+                <div class="skill">
+
+                    <div class="skill-top">
+                        <span>{{ skill.skill_name }}</span>
+
+                        <b>
+                            {% if skill.level == "Beginner" %}
+                                25%
+                            {% elif skill.level == "Intermediate" %}
+                                60%
+                            {% elif skill.level == "Advanced" %}
+                                90%
+                            {% else %}
+                                0%
+                            {% endif %}
+                        </b>
+                    </div>
+
+                    <div class="bar">
+
+                        {% if skill.level == "Beginner" %}
+                            <div class="fill" style="width: 25%;"></div>
+                        {% elif skill.level == "Intermediate" %}
+                            <div class="fill" style="width: 60%;"></div>
+                        {% elif skill.level == "Advanced" %}
+                            <div class="fill" style="width: 90%;"></div>
+                        {% else %}
+                            <div class="fill" style="width: 0%;"></div>
+                        {% endif %}
+
+                    </div>
+
+                </div>
+
+            {% empty %}
+
+                <p>Abhi koi skill assessment save nahi hua hai.</p>
+
+            {% endfor %}
+
+        </div>
+
+              
+              
+
+            
+
+
+        <!-- QUICK ACTIONS -->
+
+        <div class="section">
+
+            <h2>⚡ Quick Actions</h2>
+
+            <br>
+
+            <div class="actions">
+
+                <a class="action"
+                   href="/skill_assesment/">
+
+                    📝
+
+                    <h3>Skill Assessment</h3>
+
+                    <p>
+                        Update your technical skills
+                    </p>
+
+                </a>
+
+
+                <a class="action"
+                   href="/dreamjob/">
+
+                    🎯
+
+                    <h3>Dream Job</h3>
+
+                    <p>
+                        Select your career goal
+                    </p>
+
+                </a>
+
+
+                <a class="action"
+                   href="/skillgap/">
+
+                    📊
+
+                    <h3>Skill Gap Analysis</h3>
+
+                    <p>
+                        Check your skill gaps
+                    </p>
+
+                </a>
+
+
+                <a class="action"
+                   href="/quiz/">
+
+                    🧠
+
+                    <h3>Skill Quiz</h3>
+
+                    <p>
+                        Test your career skills
+                    </p>
+
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- ROADMAP -->
+
+        <div class="section" id="roadmap">
+
+            <h2>🗺️ Career Roadmap</h2>
+
+            <br>
+
+            <div class="roadmap-item">
+                ✓ Complete Profile
+            </div>
+
+            <div class="roadmap-item">
+                ✓ Skill Assessment
+            </div>
+
+            <div class="roadmap-item">
+                → Improve Skill Gaps
+            </div>
+
+            <div class="roadmap-item">
+                → Build Projects
+            </div>
+
+            <div class="roadmap-item">
+                → Prepare for Interviews
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+</html>
